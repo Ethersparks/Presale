@@ -1,15 +1,10 @@
-# React / Node Todo Demo
-
-This demo shows the core functionality of [Visual Studio Code](https://code.visualstudio.com)
-for Build 2016 session workshop.
-
-![todo demo](/media/todo_demo.gif)
+# React / Node Ethersparks Landing page
 
 ## Getting Started
 
 ```bash
 # clone repo
-git clone https://github.com/Microsoft/vscode-react-sample.git react-todo
+git clone https://github.com/Ethersparks/Presale PresaleSite
 
 # navigate to repo
 cd react-todo

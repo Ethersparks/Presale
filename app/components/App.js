@@ -3,6 +3,7 @@ import AppBar from 'material-ui/AppBar';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import IconButton from 'material-ui/IconButton';
 import StarIcon from 'material-ui/svg-icons/toggle/star';
+import bannerImage from '../../media/LogoMakr_7UpJ13.png';
 
 import Viewport from './Viewport';
 
@@ -11,8 +12,18 @@ class App extends React.Component {
     
     constructor() {
         super();
+        
         this.styles ={
-            backgroundColor: '#000'
+            backgroundColor: '#943',
+            height: 'auto',
+        };
+
+        this.imageStyle ={
+            backgroundImage: bannerImage,
+            maxHeight: '80px',
+            width: 'auto',
+            height: 'auto',
+            position: 'relative'
         };
     }
 
@@ -26,9 +37,8 @@ class App extends React.Component {
         return (
             <div>
                 <AppBar 
-                    style={this.styles}
-                    iconElementLeft={<IconButton><StarIcon /></IconButton>}
-                    title="Todos" 
+                style = {this.styles}
+                iconElementLeft ={<img src={bannerImage} style={this.imageStyle}/>}
                 />
                 <Viewport />
             </div>

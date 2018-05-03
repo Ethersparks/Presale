@@ -1,7 +1,7 @@
 import React from 'react';
 import TextField from 'material-ui/TextField';
 
-import TodosStore from './TodosStore';
+import RegistrationsStore from './RegistrationsStore';
 
 const RETURN_KEY_CODE = 13;
 
@@ -29,7 +29,7 @@ class NewTodo extends React.Component {
             if (text == '') {
                 return;
             }
-            TodosStore.add(event.target.value.trim());
+            RegistrationsStore.add(event.target.value.trim());
             
             // clear input
             event.target.value = '';

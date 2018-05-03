@@ -4,7 +4,7 @@ import ListItem from 'material-ui/List/ListItem';
 import IconButton from 'material-ui/IconButton';
 import ChevronRightIcon from 'material-ui/svg-icons/navigation/chevron-right';
 
-import TodosStore from './TodosStore';
+import RegistrationsStore from './RegistrationsStore';
 
 
 class Todos extends React.Component {
@@ -20,14 +20,14 @@ class Todos extends React.Component {
   }
 
   componentDidMount() {
-    TodosStore.getAll().then((data) => {
+    RegistrationsStore.getAll().then((data) => {
       console.log('get all', data);
       this.setState({
         todos: data.todos
       });
     });
     
-    TodosStore.subscribe((action) => {
+    RegistrationsStore.subscribe((action) => {
       this.setState({
         todos: action.todos
       });
@@ -35,7 +35,7 @@ class Todos extends React.Component {
   }
   
   handleClick(note) {
-    TodosStore.remove(note);
+    RegistrationsStore.remove(note);
   }
   
   create(todo) {

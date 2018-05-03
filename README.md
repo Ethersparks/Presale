@@ -7,7 +7,7 @@
 git clone https://github.com/Ethersparks/Presale PresaleSite
 
 # navigate to repo
-cd react-todo
+cd Presale Site
 
 # install deps
 npm install
@@ -19,7 +19,6 @@ npm install
 # Run in terminal
 npm run serve
 ```
-
 Instead you can also debug in Visual Studio Code with pressing the <kbd>f5</kbd> key.
 
 **Frontend**

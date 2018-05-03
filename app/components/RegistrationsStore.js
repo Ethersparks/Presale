@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import $ from 'jquery';
-import TodoData from './TodoData';
+import UserData from './UserData';
 
 const URL = 'http://localhost:3001/todos'
 
@@ -28,7 +28,7 @@ function remove(todo) {
   });
 }
 
-function add(todo) {
+function add(user) {
   return new Promise((resolve, reject) => {
     $.ajax({
       url: `${URL}`,
@@ -40,37 +40,37 @@ function add(todo) {
       dataType: 'json',
       success: resolve,
       error: reject,
-      data: JSON.stringify(todo)
+      data: JSON.stringify(user)
     });
   });
 }
 
-class TodosStore {
+class RegistrationsStore {
   
   constructor() {
-    this.idCount = 10; 
+    this.idCount = 0; 
     this.subscribers = [];
   }
   
-  add(todoText) {
+  add(email, walletId) {
     this.idCount++;
-    let todo = new TodoData(todoText, this.idCount);
+    let user = new UserData(email,walletId, this.idCount);
     
-    add(todo).then(() => {
+    add(user).then(() => {
       this.publish({
         actionType: 'add',
-        data: todo
+        data: user
       });
     });
      
     return this.idCount;
   }
   
-  remove(todo) {
-    remove(todo).then(() => {
+  remove(user) {
+    remove(user).then(() => {
       this.publish({
           actionType: 'remove',
-          data: todo
+          data: user
       });
     });
   }
@@ -81,7 +81,7 @@ class TodosStore {
   
   publish(action) {
     this.getAll().then((data) => {
-      action.todos = data.todos;
+      action.users = data.users;
       this.subscribers.forEach((subscriber) => {
         subscriber(action);
       });
@@ -94,4 +94,4 @@ class TodosStore {
 }
 
 // export singleton
-export default new TodosStore();
+export default new RegistrationsStore();

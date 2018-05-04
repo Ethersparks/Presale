@@ -1,5 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+var request = require("request");
 var _ = require('lodash');
 
 var database = require('./database');
@@ -7,6 +8,37 @@ var database = require('./database');
 // Create server
 var server = express();
 server.use(bodyParser.json());
+
+
+var getWPPost = function(req, res){
+  var headers, options;
+
+  // Set the headers
+  headers = {
+      'Content-Type':'application/x-www-form-urlencoded'
+  }
+
+  // Configure the request
+  options = {
+      url: 'http://ethersparks.io/wp-json/wp/v2/page/',
+      method: 'GET',
+      headers: headers
+  }
+
+  // Start the request
+  request(options, function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+          res.send({
+             success: true,
+             message: "Successfully fetched a list of post", 
+             posts: JSON.parse(body)
+          });
+      } else {
+           console.log(error);
+      }
+   });
+ };
+
 
 // Middleware
 server.use(function (req, res, next) {
@@ -18,14 +50,11 @@ server.use(function (req, res, next) {
 });
 
 // Routes
-server.get('/todos', function(req, res, next) {
-  database.getAll(function(todos) {
-    res.send(todos);
-    next();
-  });
+server.get('/page', function(req, res, next) {
+  getWPPost(req, res);
 });
 
-server.post('/todos', function(req, res, next) {
+server.post('/page', function(req, res, next) {
   var todo = req.body;
   database.add(todo, function(todos) {
     res.send(todos);
@@ -33,7 +62,7 @@ server.post('/todos', function(req, res, next) {
   });
 });
 
-server.delete('/todos/:id', function(req, res, next) {
+server.delete('/page/:id', function(req, res, next) {
   var id = req.params.id;
   
   database.del(id, function(todos) {

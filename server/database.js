@@ -8,6 +8,8 @@ function getAll(resolve) {
     fs.readFile(DATA, function(err, data) {
       resolve(JSON.parse(data));
     });
+
+    //get wordpress page here
 }
 
 function commit(data, resolve) {

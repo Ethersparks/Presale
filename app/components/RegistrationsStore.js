@@ -2,7 +2,7 @@ import _ from 'lodash';
 import $ from 'jquery';
 import UserData from './UserData';
 
-const URL = 'http://localhost:3001/todos'
+const URL = 'http://localhost:3001/page'
 
 function getAll() {
   return new Promise((resolve, reject) => {

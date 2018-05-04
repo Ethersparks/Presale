@@ -1,6 +1,4 @@
 import React from 'react';
-import AppBar from 'material-ui/AppBar';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import IconButton from 'material-ui/IconButton';
 import StarIcon from 'material-ui/svg-icons/toggle/star';
 import bannerImage from '../../media/LogoMakr_7UpJ13.png';
@@ -8,12 +6,18 @@ import bannerImage from '../../media/LogoMakr_7UpJ13.png';
 import Viewport from './Viewport';
 
 
-class App extends React.Component {
+class Presale extends React.Component {
     
     constructor() {
         super();
         this.state = {
             users : []
+        };
+        this.divStyle = {    
+            textAlign: 'center',
+            backgroundColor: '#add8e6',
+            paddingTop: '70px',
+            paddingBottom: '70px',
         };
 
         this.styles ={
@@ -31,32 +35,11 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        let dataURL = "http://localhost:3001/page";
-        fetch(dataURL)
-        .then(res => res.json())
-        .then(res => {
-            console.log(res);
-          this.setState({
-            users: res
-          })
-        })
-
     }
-
-    // getChildContext(){
-    //   return {
-    //     muiTheme: getMuiTheme()
-    //   };
-    // }
-    
-    // <AppBar 
-    // style = {this.styles}
-    // iconElementLeft ={<img src={bannerImage} style={this.imageStyle}/>}
-    // />
 
     render() {
         return (
-            <div>
+            <div style={this.divStyle}>
             <h2>Star Wars Movies</h2>
             </div>
         );
@@ -64,9 +47,9 @@ class App extends React.Component {
 }
 
 
-App.childContextTypes = {
+Presale.childContextTypes = {
     muiTheme: React.PropTypes.object
 };
 
 
-export default App;
+export default Presale;

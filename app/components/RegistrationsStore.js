@@ -4,6 +4,19 @@ import UserData from './UserData';
 
 const URL = 'http://localhost:3001/page'
 
+
+function getPage() {
+  return new Promise((resolve, reject) => {
+    $.ajax({
+      url: URL,
+      method: 'GET',
+      dataType: 'text/html',
+      success: resolve,
+      error: reject
+    });
+  });
+}
+
 function getAll() {
   return new Promise((resolve, reject) => {
     $.ajax({

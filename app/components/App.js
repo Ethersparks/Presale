@@ -13,12 +13,37 @@ class App extends React.Component {
     constructor() {
         super();
         this.state = {
-            users : []
+            users : [],
+            showWPHtml:false,
+            wpPost:undefined,
         };
 
-        this.styles ={
-            backgroundColor: '#943',
-            height: 'auto',
+        
+        this.headerStyle ={
+            color: '#575757',
+            maxWidth: '1100px',
+            top: 'auto',
+            height: '90px',
+            position: 'relative',
+            margin: '0 auto',
+        };
+
+        this.linkContainer ={
+            textAlign: 'center',
+            //backgroundImage: url("http://ethersparks.io/wp-content/uploads/2018/04/100620-digital-backgrounds-2880x1800-720p.jpg"),
+            paddingTop: '0px',
+            paddingBottom: '0px',
+            backgroundPosition: 'center 18px',
+            backgroundAttachment: 'fixed',
+        };
+
+        this.footerStyle ={
+            textAlign: 'center',
+            //backgroundImage: url("http://ethersparks.io/wp-content/uploads/2018/04/100620-digital-backgrounds-2880x1800-720p.jpg"),
+            paddingTop: '0px',
+            paddingBottom: '0px',
+            backgroundPosition: 'center 18px',
+            backgroundAttachment: 'fixed',
         };
 
         this.imageStyle ={
@@ -28,17 +53,21 @@ class App extends React.Component {
             height: 'auto',
             position: 'relative'
         };
-    }
+    };
+    
+  
+    setExternalHTML(vis) {
+        this.setState({showWPHtml: vis});
+    };
 
     componentDidMount() {
         let dataURL = "http://localhost:3001/page";
         fetch(dataURL)
         .then(res => res.json())
         .then(res => {
-            console.log(res);
-          this.setState({
-            users: res
-          })
+            console.log(res.post);
+            this.setState({wpPost:res.post});
+            this.setExternalHTML(true);
         })
 
     }
@@ -53,13 +82,24 @@ class App extends React.Component {
     // style = {this.styles}
     // iconElementLeft ={<img src={bannerImage} style={this.imageStyle}/>}
     // />
-
+    getwpPost() {
+        return {__html: this.state.wpPost};
+    }
     render() {
-        return (
-            <div>
-            <h2>Star Wars Movies</h2>
-            </div>
-        );
+        // if (this.wpPost) {
+        //     return ( 
+        //         <div> this.wpPost </div>
+        //     )
+        // } else
+        {
+            return (
+                <div>
+                {this.state.showWPHtml ? <div>
+                  <div dangerouslySetInnerHTML={this.getwpPost()} ></div>
+                </div> : null}
+              </div>
+            );
+        }
     }
 }
 

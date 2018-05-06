@@ -20,7 +20,7 @@ var getWPPost = function(req, res){
 
   // Configure the request
   options = {
-      url: 'http://ethersparks.io/wp-json/wp/v2/page/',
+      url: 'http://ethersparks.io',
       method: 'GET',
       headers: headers
   }
@@ -28,10 +28,11 @@ var getWPPost = function(req, res){
   // Start the request
   request(options, function (error, response, body) {
       if (!error && response.statusCode == 200) {
+        console.log(body);
           res.send({
              success: true,
              message: "Successfully fetched a list of post", 
-             posts: JSON.parse(body)
+             post: body
           });
       } else {
            console.log(error);

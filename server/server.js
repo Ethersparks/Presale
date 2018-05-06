@@ -15,7 +15,8 @@ var getWPPost = function(req, res){
 
   // Set the headers
   headers = {
-      'Content-Type':'application/x-www-form-urlencoded'
+      'Content-Type':'application/x-www-form-urlencoded',
+      'Access-Control-Allow-Origin': '*',
   }
 
   // Configure the request
@@ -28,7 +29,6 @@ var getWPPost = function(req, res){
   // Start the request
   request(options, function (error, response, body) {
       if (!error && response.statusCode == 200) {
-        console.log(body);
           res.send({
              success: true,
              message: "Successfully fetched a list of post", 
@@ -44,7 +44,7 @@ var getWPPost = function(req, res){
 // Middleware
 server.use(function (req, res, next) {
   // allow origin for demo purposes
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
+  res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
   next();

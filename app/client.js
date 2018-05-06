@@ -1,10 +1,10 @@
 import ReactDOM from 'react-dom';
 import React from 'react'; // necessary to import for compilation
-import App from './components/App';
+import Homepage from './components/Homepage';
 
 require('./globals.scss');
 
 ReactDOM.render(
-    <App />,
-    document.getElementById('app')
+    <Homepage />,
+    document.getElementById('Homepage')
 );

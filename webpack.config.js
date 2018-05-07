@@ -7,13 +7,15 @@ var APP_ROOT = 'app';
 var entries = [
      './' + APP_ROOT + '/client',
 	 'webpack-dev-server/client?http://localhost:8080',
-	 'webpack/hot/dev-server'
 ];
 
 var loaders = [
     {
         test: /\.scss$/,
-        loader: 'style!css?modules!sass',
+        use: [
+          { loader: "style-loader" },
+          { loader: "css-loader" }
+        ],
         include: path.join(__dirname, APP_ROOT)
     },
     {
@@ -32,18 +34,33 @@ var plugins = [
 ];
 
 module.exports = {
-       devtool: 'source-map',
-       entry: entries,
-       output: {
-      		path: path.join(__dirname, 'dist'),
-      		filename: 'bundle.js'
-      },
-      plugins: plugins,
-      module: {
-		      loaders: loaders
-      },
-      devServer: {
-		      contentBase: './dist',
-		      hot: true
-      }
+        mode:"development",
+        devtool: 'source-map',
+        context: __dirname, // string (absolute path!)
+        target:"web",
+        entry: entries,
+        output: {
+                path: path.resolve(__dirname, 'dist'),
+                filename: 'bundle.js'
+        },
+        plugins: plugins,
+        module : { rules: loaders },
+        devServer: {
+                proxy: { // proxy URLs to backend development server
+                    '/api': 'http://localhost:3001'
+                },
+                contentBase: path.join(__dirname, 'app'),
+                hot: true
+        },
+        resolve: {
+            // options for resolving module requests
+            // (does not apply to resolving to loaders)
+            modules: [
+              "node_modules",
+              path.resolve(__dirname, "app")
+            ],
+            // directories where to look for modules
+        
+            extensions: [".js", ".json", ".jsx", ".css"],
+        },
 };

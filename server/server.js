@@ -2,13 +2,13 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var request = require("request");
 var _ = require('lodash');
-
 var database = require('./database');
 
 // Create server
 var server = express();
 server.use(bodyParser.json());
 
+//var htmlToReactParser = new HtmlToReactParser();
 
 var getWPPost = function(req, res){
   var headers, options;
@@ -29,6 +29,7 @@ var getWPPost = function(req, res){
   // Start the request
   request(options, function (error, response, body) {
       if (!error && response.statusCode == 200) {
+          console.log(body);
           res.send({
              success: true,
              message: "Successfully fetched a list of post", 

@@ -30,6 +30,7 @@ var getWPPost = function(req, res){
   request(options, function (error, response, body) {
       if (!error && response.statusCode == 200) {
           console.log(body);
+
           res.send({
              success: true,
              message: "Successfully fetched a list of post", 
@@ -62,6 +63,11 @@ server.post('/page', function(req, res, next) {
     res.send(todos);
     next();
   });
+});
+
+server.post('/addUser', function(req, res, next) {
+  var user = req.body;
+
 });
 
 server.delete('/page/:id', function(req, res, next) {

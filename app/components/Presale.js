@@ -1,4 +1,5 @@
 import React from 'react';
+import RegistrationsStore from './RegistrationsStore'
 
 class RegistrationUtils {
     static isEmailValid(email) {
@@ -21,12 +22,10 @@ class RegistrationForm extends React.Component {
       };
   
       this.handleInputChange = this.handleInputChange.bind(this);
+      RegistrationsStore.subscribe(this.handleServerSubmit);
     }
   
-    handleInputChange(event) {
-      const target = event.target;
-      const value = target.value;
-      const name = target.name;
+    handleInputChange(name,value) {
       //set state
       if(name == "email") {
         this.setState({
@@ -46,22 +45,31 @@ class RegistrationForm extends React.Component {
     }
 
     handleBlur(fieldName) {
-        this.setState(state => ({
-            ...state,
-            blurred: {
-                ...state.blurred,
-                [fieldName]: true
-            }
-        }))
+        
+        const blur = this.state.blurred;
+        blur[fieldName] = true;
+
+        // update state
+        this.setState({
+            blurred: blur,
+        });
+    }
+
+    handleServerSubmit(action) {
+        console.log("Success from server");
+        console.log(action);
     }
 
     handleFormSubmit(event) {
         //connect to DB and post after validation
+        console.log("Hurray! : "+this.state.input.email)
+        console.log("Hurray! : "+this.state.input.address)
+        RegistrationsStore.add(this.state.input.email, this.state.input.address);
     }
     
     validate() {
         const errors = {};
-        const {input, blurred} = this.state;
+        const {input} = this.state;
         
         if (!input.email) {
             errors.email = 'Email is required';
@@ -82,16 +90,19 @@ class RegistrationForm extends React.Component {
     render() {
         const {input, blurred} = this.state;
         const {errors, isValid} = this.validate();
-
+        
+        //different behaviors, on submit instead of click
+        {/* <form onSubmit={() => {this.handleFormSubmit()}} disabled={!isValid}> > */}
+        {/* <button type="submit*/}
         return (
-            <form onSubmit={this.handleFormSubmit()}>
+            <form >
                 <div>
                     <input
                         name="email"
                         placeholder="email"
                         value={input.email}
                         onBlur={() => this.handleBlur('email')}
-                        onChange={e => this.handleInputChange({email: e.target.value})}
+                        onChange={e => this.handleInputChange("email",e.target.value)}
                     />
                     {blurred.email && !!errors.email && <span>{errors.email}</span>}
                 </div>
@@ -101,11 +112,11 @@ class RegistrationForm extends React.Component {
                         placeholder="address"
                         value={input.address}
                         onBlur={() => this.handleBlur('address')}
-                        onChange={e => this.handleInputChange({address: e.target.value})}
+                        onChange={e => this.handleInputChange("address", e.target.value)}
                     />
                     {blurred.address && !!errors.address && <span>{errors.address}</span>}
                 </div>
-                    <button type="submit" disabled={!isValid}>
+                    <button type="button"onClick={() => {this.handleFormSubmit()}} disabled={!isValid}>
                         Submit
                     </button>
             </form>
@@ -139,7 +150,7 @@ class PresaleForm extends React.Component {
             top: "50%",
             marginLeft: "-150px",
             marginTop: "-75px",
-            opacity:"0.5",
+            opacity:"1.0",
             backgroundColor: '#FFFFFF'
         }
         this.formDivStyle = {

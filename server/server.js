@@ -1,10 +1,36 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var request = require("request");
+const mysql = require("mysql")
+
+
+class AwsService {
+  constructor() {
+
+      
+      this.mysqlDB = mysql.createConnection({
+          host:'ethersparkuserbase.clw8hn9uuxrr.us-west-1.rds.amazonaws.com',
+          port:'3306',
+          user: '',
+          password: '',
+          database: 'Users',
+      });
+      this.mysqlDB.connect();
+      console.log(this.mysqlDB);
+  }
+
+  createTable(name) {
+      //
+  }
+
+}
+
 
 // Create server
 var server = express();
 server.use(bodyParser.json());
+
+const awsServ = new AwsService();
 
 // Middleware
 server.use(function (req, res, next) {

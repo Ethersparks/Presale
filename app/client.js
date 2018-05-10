@@ -1,10 +1,10 @@
 import ReactDOM from 'react-dom';
 import React from 'react'; // necessary to import for compilation
-import Homepage from './components/Homepage';
+import PresaleForm from './components/Presale';
 
 require('./globals.scss');
 
 ReactDOM.render(
-    <Homepage />,
+    <PresaleForm />,
     document.getElementById('Homepage')
 );

@@ -1,3 +1,16 @@
 body {
     margin: 0;
 }
+
+.field {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+label {
+
+    display: block;
+    font-size: 0.8rem;
+    line-height: 1.4rem;
+    font-weight: 600;
+    color: $color-label;
+}

@@ -10,11 +10,13 @@ class RegistrationUtils {
 class RegistrationForm extends React.Component {
     constructor(props) {
       super(props);
+      this.defaultInputState = {
+          email : "",
+          address: "",
+      };
+      
       this.state = {
-        input: {
-            email: "",
-            address: ""
-        },
+        input: this.defaultInputState,
         blurred: {
             email: false,
             address: false
@@ -65,6 +67,7 @@ class RegistrationForm extends React.Component {
         console.log("Hurray! : "+this.state.input.email)
         console.log("Hurray! : "+this.state.input.address)
         RegistrationsStore.add(this.state.input.email, this.state.input.address);
+        this.state.input = this.defaultInputState;
     }
     
     validate() {

@@ -53,7 +53,9 @@ Json sent to server will have the following format for a single user
 There are a couple of issues to fix before this code base should
 be used as a model for a production ready application.
 * Add Front End
-* Swap out the file based data model for a real data backend.
+* Better Authentication
+* Error handling
+* Input validation
 * Replace webpack dev server with an application server or serve up the app with the Node server.
 * Encrypt everything.
 * Add Metamask
@@ -64,8 +66,9 @@ be used as a model for a production ready application.
 * [express](http://expressjs.com/)
 * [webpack](https://webpack.github.io/)
 * [react](https://facebook.github.io/react/)
-* [material-ui](http://www.material-ui.com/#/)
+* [material-ui](http://www.material-ui.com/#/) (NOT USED but installed)
 * [babel](https://babeljs.io/)
 * [eslint](http://eslint.org/)
-* [aws](https://aws.amazon.com/sdk-for-node-js/)
-* [web3](https://github.com/ethereum/web3.js/)
+* [aws](https://aws.amazon.com/sdk-for-node-js/) (NOT USED YET but installed)
+* [web3](https://github.com/ethereum/web3.js/) (NOT USED YET but installed)
+* [mysql](https://github.com/mysqljs/mysql)

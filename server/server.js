@@ -10,8 +10,8 @@ class AwsService {
           connectionLimit : 10,
           host:'ethersparkuserbase.clw8hn9uuxrr.us-west-1.rds.amazonaws.com',
           port:'3306',
-          user: 'cryptoTacoMaster',
-          password: 'WrS2}LY)a>=RTeeS',
+          user: '',
+          password: '',
           database: 'Users',
       });
       this.connected = false;

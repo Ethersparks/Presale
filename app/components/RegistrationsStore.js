@@ -5,18 +5,22 @@ import UserData from './UserData';
 const URL = 'http://localhost:3001/user'
 
 function add(user) {
+  console.log(user);
+  const email = user.email;
+  const wallet = user.publicWallet;
+  const data = {
+    email:email,
+    publicAddres:wallet,
+  };
   return new Promise((resolve, reject) => {
     $.ajax({
       url: `${URL}`,
       crossDomain: true,
       method: 'POST',
-      headers: {
-        'content-type': 'application/json'
-      },
-      dataType: 'json',
+      ContentType: 'application/json',
       success: resolve,
       error: reject,
-      data: JSON.stringify(user)
+      data: data
     });
   });
 }

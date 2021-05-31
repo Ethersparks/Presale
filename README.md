@@ -31,33 +31,44 @@ npm run dev
 Run from Visual Studio Code by executing command (with <kbd>f1</kbd> to open command palette) 
 `Run Task` and selecting `dev`.
 
-**Database**
+**AWS S3**
+Will be used s3 for file storage
 
-No configuration should be necessary necessary. Data backend is simply a json file called `todos.json` in `data/`.
-If you run into any issues make sure `todos.json` has the following inside before starting the 
-server. This will become more robust overtime.
+**AWS Database**
+need to configure for aws access. Please read link below to setup credentials in ~/.aws
+https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/getting-started-nodejs.html
 
+Json sent to server will have the following format for a single user
 ```json
 {
-    "todos": []
+    "user": {
+        "email" : "",
+        "ethAddress": "",
+        "timeStamp": "",
+    }
 }
 ```
 
-## Not meant for production
-
+## Missing steps for production
 There are a couple of issues to fix before this code base should
 be used as a model for a production ready application.
-
-* Swap out the file based data model for a real data backend.
+* Add Front End
+* Better Authentication
+* Error handling
+* Input validation
 * Replace webpack dev server with an application server or serve up the app with the Node server.
+* Encrypt everything.
+* Add Metamask
 
 ## Technologies
-
 * [Visual Studio Code](https://code.visualstudio.com)
 * [node](https://nodejs.org/en/)
 * [express](http://expressjs.com/)
 * [webpack](https://webpack.github.io/)
 * [react](https://facebook.github.io/react/)
-* [material-ui](http://www.material-ui.com/#/)
+* [material-ui](http://www.material-ui.com/#/) (NOT USED but installed)
 * [babel](https://babeljs.io/)
 * [eslint](http://eslint.org/)
+* [aws](https://aws.amazon.com/sdk-for-node-js/) (NOT USED YET but installed)
+* [web3](https://github.com/ethereum/web3.js/) (NOT USED YET but installed)
+* [mysql](https://github.com/mysqljs/mysql)

@@ -2,58 +2,25 @@ import _ from 'lodash';
 import $ from 'jquery';
 import UserData from './UserData';
 
-const URL = 'http://localhost:3001/page'
-
-
-function getPage() {
-  return new Promise((resolve, reject) => {
-    $.ajax({
-      url: URL,
-      method: 'GET',
-      dataType: 'text/html',
-      success: resolve,
-      error: reject
-    });
-  });
-}
-
-function getAll() {
-  return new Promise((resolve, reject) => {
-    $.ajax({
-      url: URL,
-      method: 'GET',
-      dataType: 'json',
-      success: resolve,
-      error: reject
-    });
-  });
-}
-
-function remove(todo) {
-  return new Promise((resolve, reject) => {
-    $.ajax({
-      url: `${URL}/${todo.id}`,
-      method: 'DELETE',
-      dataType: 'json',
-      success: resolve,
-      error: reject
-    });
-  });
-}
+const URL = 'http://localhost:3001/user'
 
 function add(user) {
+  console.log(user);
+  const email = user.email;
+  const wallet = user.publicWallet;
+  const data = {
+    email:email,
+    publicAddres:wallet,
+  };
   return new Promise((resolve, reject) => {
     $.ajax({
       url: `${URL}`,
       crossDomain: true,
       method: 'POST',
-      headers: {
-        'content-type': 'application/json'
-      },
-      dataType: 'json',
+      ContentType: 'application/json',
       success: resolve,
       error: reject,
-      data: JSON.stringify(user)
+      data: data
     });
   });
 }
@@ -78,27 +45,14 @@ class RegistrationsStore {
      
     return this.idCount;
   }
-  
-  remove(user) {
-    remove(user).then(() => {
-      this.publish({
-          actionType: 'remove',
-          data: user
-      });
-    });
-  }
-  
-  getAll() {
-      return getAll();
-  }
-  
+    
   publish(action) {
-    this.getAll().then((data) => {
-      action.users = data.users;
+    // this.getAll().then((data) => {
+    //   action.users = data.users;
       this.subscribers.forEach((subscriber) => {
         subscriber(action);
       });
-    });
+    //});
   }
   
   subscribe(subscriber) {
